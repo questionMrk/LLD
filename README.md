@@ -34,7 +34,7 @@ By using LLD Version 1.2 (available at github.com), you agree to adhere to the f
 
 3. No Liability: We are not responsible for consequences arising from your actions while using the Service. Violations of this Code are solely your responsibility.
 
-4. Reporting Violations: Please report any violations of this Code of Conduct to us at [Your Email Address].
+4. Reporting Violations: Please report any violations of this Code of Conduct.
 
 5. Changes to the Code: This Code of Conduct may be updated periodically. Please review it regularly for any changes.
 
