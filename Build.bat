@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title LLD Builder ^| Version 1.2 Loaded
+title LLD Builder ^| Version 1.3 Loaded
 set GREEN=[32m
 set CYAN=[36m
 set YELLOW=[33m
@@ -9,14 +9,14 @@ set RESET=[0m
 :menu
 cls
 echo ====================================================================================
-echo                                 %CYAN%LLD Version 1.2%RESET%                
+echo                                 %CYAN%LLD Version 1.3%RESET%                
 echo ====================================================================================
 echo  %GREEN%[X] %RESET%- %CYAN%Exit
 echo  %GREEN%[G] %RESET%- %CYAN%Github
 echo  %GREEN%[Y] %RESET%- %CYAN%Youtube
 echo  %GREEN%[I] %RESET%- %CYAN%Start LLD%RESET%
 echo ====================================================================================
-echo                                    %CYAN%v1.2 %GREEN%BETA    %RESET%                
+echo                                    %CYAN%v1.3 %GREEN%BETA    %RESET%                
 echo ====================================================================================
 set /p choice="Select an option: "
 
